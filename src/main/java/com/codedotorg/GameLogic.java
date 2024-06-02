@@ -28,10 +28,16 @@ public class GameLogic {
      * @return an integer representing the next guess to make (-1 if the user's response is invalid)
      */
     public int binarySearch(String predictedClass) {
-        
-        return 0;
+        if (predictedClass.equals("higher")) {
+            return guessHigher();
+        } else if (predictedClass.equals("lower")) {
+            return guessLower();
+        } else if (predictedClass.equals("stop")) {
+            return guessCorrect();
+        } else {
+            return -1;
+        }
     }
-
     /**
      * Checks if the user's guess is correct.
      * 
@@ -39,10 +45,8 @@ public class GameLogic {
      * @return true if the user's guess is "stop", false otherwise
      */
     public boolean isGuessCorrect(String predictedClass) {
-        
-        return false;
+        return predictedClass.equals("stop");
     }
-
     /**
      * Returns the next guess by assuming the number is higher than the current guess.
      * Updates the left boundary of the search space to be the current guess.
@@ -51,31 +55,30 @@ public class GameLogic {
      * @return the next guess
      */
     public int guessHigher() {
-        
-        return 0;
+        left = guess + 1;
+        guess = (left + right) / 2;
+        return guess;
     }
-
     /**
-     * Calculates the next guess by setting the current guess as the upper bound and
-     * gets the middle of the lower and upper bounds as the new guess.
-     *
-     * @return the new guess
+     * Returns the next guess by assuming the number is lower than the current guess.
+     * Updates the right boundary of the search space to be the current guess.
+     * The next guess is the number in the middle of the left and right boundaries.
+     * 
+     * @return the next guess
      */
     public int guessLower() {
-        
-        return 0;
+        right = guess - 1;
+        guess = (left + right) / 2;
+        return guess;
     }
-
     /**
      * Returns the correct guess.
      * 
      * @return the correct guess
      */
     public int guessCorrect() {
-
-        return 0;
+        return guess;
     }
-
     /**
      * Resets the game by setting the left boundary to 0, the right boundary to 100,
      * and the guess to the midpoint of the boundaries.
